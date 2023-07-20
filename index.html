@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closure</title>
+</head>
+<body>
+    <pre>
+        <b>
+            Q1.   function counter(){
+                var counter = 0;
+            
+                function IncreaseCounter() {
+                    return counter += 1;
+                };
+            
+                return IncreaseCounter;
+            }
+            
+            var counter = counter();
+            alert(counter());
+            alert(counter());
+            alert(counter());
+            alert(counter());
+        </b>
+    </pre>
+
+    <pre>
+        The output of the code is:
+        1
+        2
+        3
+        4
+
+        Explanation:
+        Here firstly creating a function counter and again creating
+        an another function in that counter function with some return 
+        value and returning the inner function in outer function 
+
+        And now by creating the variable we are calling the counter function 
+        when we create a variable and call the function , it will access the 
+        inner function and gives the output of inner function 
+        so it gives the output of inner function
+
+        When we call counter, it increments the counter variable by 1 
+        and returns its updated value.
+
+        Each  call to counter() will further increment the value 
+        of the counter variable and return the updated value.
+    </pre>
+
+    <pre>
+        <b>
+            Q2. let count = 0;
+            (function () {
+              if (count === 0) {
+                let count = 1;
+                console.log(count); // What is logged?
+              }
+              console.log(count); // What is logged?
+            })();
+        </b>
+    </pre>
+
+    <pre>
+        The output of the code is:
+        1
+        0
+        
+        Explanation:
+        The code is an immediately-invoked function expression (IIFE), 
+        an anonymous function that executes immediately after its declaration.
+
+        In that there is one condition that if that satisfies the count 
+        assigns the new value and prints that new value 
+        and outside the condition we printed the count which is
+        globally declared 
+    </pre>
+
+
+    <pre>
+        <b>
+            Q3. "for (var i = 0; i < 3; i++) {
+                setTimeout(function log() {
+                  console.log(i); // What is logged?
+                }, 1000);
+              }"
+        </b>
+    </pre>
+
+    <pre>
+        The output of the code is:
+        3
+        3
+        3
+        
+        Explanation:
+        Asper code the loop runs and every time it runs it updates the value 
+        which must be printed , but due to set interval it will not
+        print the value and delays it for one second and runs again the loop
+        at the end of printing the value , the i is assigned as 3 
+        so the loop already happend 3 and updated three times 
+        but not printed 
+        now the three times printing value prints at once and that is i 
+        which assigned as 3
+
+    </pre>
+
+
+    <pre>
+        <b>
+            Q4. Write a code to calculate area of a rectangle using inner function. 
+            In this case outer function should accept parameter length and inner function should accept parameter breadth.
+        </b>
+    </pre>
+
+    <pre>
+        The code is:
+        function outer(length) {
+            function inner(breadth) {
+              return length * breadth;
+            }
+          
+            return inner;
+          }
+          
+          const value = outer(5);
+          const area = value(10);
+          console.log("Area of the rectangle:", area);
+     
+          output:
+          Area of the rectangle: 50
+
+    </pre>
+
+    <pre>
+        <b>
+            Q5. Take a variable in outer function and create an inner function to increase the counter every time it is called
+        </b>
+    </pre>
+
+    <pre>
+        The code is:
+        function counterFunction() {
+            let counter = 0; 
+            function increaseCounter() {
+              counter++;
+              return counter; 
+            }
+            return increaseCounter; 
+          }
+          const increaseCounter = counterFunction();
+          console.log(increaseCounter()); // Output: 1
+          console.log(increaseCounter()); // Output: 2
+          console.log(increaseCounter()); // Output: 3
+          console.log(increaseCounter()); // Output: 4
+     
+    </pre>
+
+    <pre>
+        <b>
+            Q6. "Print Output
+
+            var a = 12;
+            (function () {
+              alert(a);
+            })();"
+        </b>
+    </pre>
+    
+    <pre>
+        The output of the code is: 12 in alert 
+        
+        Explanation:
+        The code declares a global variable a and 
+        initializes it with a value of 12.
+
+        Immediately after declaring the variable a, there 
+        is an immediately-invoked function expression (IIFE),
+        an anonymous function that executes immediately after its declaration.
+
+        so it assigns the value in global variable and gives output as 12
+    </pre>
+
+    <pre>
+        <b>
+            Q7. "var a = 10;
+            var x = (function () {
+              var a = 12;
+              return function () {
+                alert(a);
+              };
+            })();
+            x();"
+        </b>
+    </pre>
+    
+    <pre>
+        The output of the code is:
+        
+        Explanation:
+        The code declares two variables a and x in the global scope
+
+        The x variable is assigned the result of an 
+        immediately-invoked function expression (IIFE).
+
+        The IIFE is an anonymous function that defines a 
+        local variable a with a value of 12 within its own scope
+
+        Inside the IIFE, the function returns another 
+        function which is a closure that is not executed immediately
+
+        The outer function (IIFE) is immediately invoked
+        after its declaration. This causes it to execute and returns the inner function.
+
+        The x variable now holds the inner function, which is a closure. 
+        This closure gains access to the variable a within the IIFE, 
+        even after the IIFE has finished executing.
+        so the output gives as 12 which is closure
+    </pre>
+
+    <pre>
+        <b>
+            Q8. var globalVar = ""xyz"";
+
+            (function outerFunc(outerArg) {
+                var outerVar = 'a';
+                
+                (function innerFunc(innerArg) {
+                var innerVar = 'b';
+                
+                console.log(
+                    "outerArg = " + outerArg + "\n" +
+                    "innerArg = " + innerArg + "\n" +
+                    "outerVar = " + outerVar + "\n" +
+                    "innerVar = " + innerVar + "\n" +
+                    "globalVar = " + globalVar);
+                
+                })(456);
+            })(123);
+        </b>
+    </pre>
+
+    <pre>
+        The output of the code is:
+        outerArg = 123
+        innerArg = 456
+        outerVar = a
+        innerVar = b
+        globalVar = xyz
+
+        
+        Explanation:
+        There are two IIFE functions which has some parameters and 
+        at the end of IIFE they given the arguments 
+        and they declared one global variable 
+        and two functional variables in two IIFE
+        so the printed all the values 
+        with the help of closure they look for values in parent
+        functions and print them
+
+    </pre>
+
+</body>
+</html>
